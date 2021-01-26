@@ -73,8 +73,8 @@ public class ComputerPlayer extends Player {
         }
         int[] tab = {h, d, s, c};
         for (int i = 0; i < tab.length; i++) {
-            if (tab[0] > current) {
-                current = tab[0];
+            if (tab[i] > current) {
+                current = tab[i];
             }
         }
         if (s == current) {
@@ -97,6 +97,6 @@ public class ComputerPlayer extends Player {
                 count++;
         }
 
-        return getN() - count <= 1;
+        return getN() - count <= 1&&count!=0;
     }
 }

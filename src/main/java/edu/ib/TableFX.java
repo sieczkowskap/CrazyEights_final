@@ -25,6 +25,7 @@ public class TableFX extends Application {
         Parent root= FXMLLoader.load(getClass().getResource("/fxml/table.fxml"));
         Scene scene= new Scene(root,600,600);
         primaryStage.setScene(scene);
+        scene.getStylesheets().add("fxml/combo.css");
         primaryStage.setTitle("Table");
         primaryStage.show();
     }

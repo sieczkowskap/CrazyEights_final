@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.collections.*;
 
+
 public class TableFXController {
     // Club - \u2663
     // Spades - \u2660
@@ -77,8 +78,8 @@ public class TableFXController {
     boolean playersError = false;
 
     ObservableList<String> clear = FXCollections.observableArrayList(" ");
-    ObservableList<String> suits = FXCollections.observableArrayList("\u2663",
-            "\u2660", "\u2666", "\u2665");
+    ObservableList<String> suits = FXCollections.observableArrayList(" \u2663",
+            " \u2660", " \u2666", " \u2665");
 
 
     // boolean isCbSuitsEmpty = CBSuitSelect.getSelectionModel().isEmpty(); // informacja czy jest wybrany kolor
@@ -104,32 +105,6 @@ public class TableFXController {
         // CBCardSelect.setItems(clear);
         CBCardSelect.setItems(stringsToUnicode(p[0].getCards())); // posiadane aktualnie karty
         TVPlayerCards.setText("Your cards: " + String.valueOf(p[0].getN()));
-    }
-
-    @FXML
-    void onBtnNewGameClick(ActionEvent event) throws FileNotFoundException {
-        deck = new Deck();
-        table = new Table();
-
-        for (int i = 0; i < p1.getCards().size() - 1; i++)
-            p1.move(p1.getCards().size() - 1, deck);
-
-        for (int i = 0; i < p2.getCards().size() - 1; i++)
-            p2.move(p2.getCards().size() - 1, deck);
-
-        for (int i = 0; i < table.getCards().size() - 1; i++)
-            table.move(table.getCards().size() - 1, deck);
-
-        //p = {p1, p2}; // gracze
-        rank = "";
-        suit = "";
-        winner = true;
-        winnerName = "";
-        currentCard = new Card();
-        String currentSuit;
-
-        boolean playersError = false;
-        initialize();
     }
 
 
@@ -219,12 +194,12 @@ public class TableFXController {
                     shuffleDeckIfEmptyComputer(); // tasowanie kart, kiedy brak na stosie
 
                     while (flag1) { // ruch komputera
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException ie) {
-                            Thread.currentThread().interrupt();
-                        }
-
+//                        try {
+//                            Thread.sleep(500);
+//                        } catch (InterruptedException ie) {
+//                            Thread.currentThread().interrupt();
+//                        }
+                        System.out.println("hui");
                         boolean madeAMove = false;
                         for (int j = 0; j < p[i].getCards().size(); j++) {
                             if (madeAMove) {
@@ -270,7 +245,7 @@ public class TableFXController {
                                                 break;
                                             }
                                         }
-                                    }
+                                    } if(madeAMove) break;
                                 }
                             }
                         }
@@ -287,6 +262,8 @@ public class TableFXController {
                 winner = false;
                 winnerName = "Player " + (i + 1);
                 TVPrompts.setText("Winner: " + winnerName);
+                BtnDraw.setDisable(true);
+                BtnPlay.setDisable(true);
                 break;
             }
         }
@@ -299,6 +276,7 @@ public class TableFXController {
         CBCardSelect.setItems(clear);
         CBCardSelect.setItems(stringsToUnicode(p[0].getCards())); // posiadane aktualnie karty
         TVOponentAction.setText("Current suit: " + stringToUnicode(currentSuit));
+        CBSuitSelect.setItems(suits);
     }
 
     void shuffleDeckIfEmptyPlayer() {
@@ -385,16 +363,17 @@ public class TableFXController {
 
     // comboBox Cards
     String[] unicodeToStringsCards(String uni) {
-        String[] split = uni.split(" ");
+       String inter = uni.substring(1);
+        String[] split = (inter.split("\t"));
 
         for (int i = 0; i < split.length; i++) {
-            if (split[1].equals("\u2663"))
+            if (split[1].equals("\u2663 "))
                 split[1] = "Clubs";
-            else if (split[1].equals("\u2660"))
+            else if (split[1].equals("\u2660 "))
                 split[1] = "Spades";
-            else if (split[1].equals("\u2666"))
+            else if (split[1].equals("\u2666 "))
                 split[1] = "Diamonds";
-            else if (split[1].equals("\u2665"))
+            else if (split[1].equals("\u2665 "))
                 split[1] = "Hearts";
         }
 
@@ -416,18 +395,50 @@ public class TableFXController {
             else if (suit.equals("Hearts"))
                 suit = "\u2665 ";
 
-            unis[i] = cards.get(i).getRank() + " " + suit;
+            unis[i] = " " + cards.get(i).getRank() + "\t" + suit;
         }
 
         return FXCollections.observableArrayList(unis);
     }
 
     void showCard(String rank, String suit) throws FileNotFoundException {
+        //File file = new File("resources/images/2D.png");
+        //URL resource = getClass().getResource();
+        //String path = "edu\\ib\\images\\2D.png";
+        //FileInputStream inputStream = new FileInputStream("C:\\Users\\pauli\\IdeaProjects\\CrazyEights\\src\\main\\java\\edu\\ib\\images\\" + rank + suit.charAt(0) + ".png");
+        //FileInputStream inputStream = new FileInputStream(file);
+       // ivSerialAssignmentLogo.setImage();
+        //Image img = new Image(String.valueOf(resource));
+        Image escribir = new Image(getClass().getResourceAsStream("/images/" + rank + suit.charAt(0) + ".png"));
+        imageView.setImage(escribir);
+    }
 
-        FileInputStream inputStream = new FileInputStream("C:\\Users\\pauli\\IdeaProjects\\CrazyEights\\src\\main\\java\\edu\\ib\\images\\" + rank + suit.charAt(0) + ".png");
+    @FXML
+    void onBtnNewGameClick(ActionEvent event) throws FileNotFoundException {
+//        deck = new Deck();
+//        table = new Table();
+//
+//        for (int i = 0; i < p1.getCards().size() - 1; i++)
+//            p1.move(p1.getCards().size() - 1, deck);
+//
+//        for (int i = 0; i < p2.getCards().size() - 1; i++)
+//            p2.move(p2.getCards().size() - 1, deck);
+//
+//        for (int i = 0; i < table.getCards().size() - 1; i++)
+//            table.move(table.getCards().size() - 1, deck);
+//
+//        //p = {p1, p2}; // gracze
+//        rank = "";
+//        suit = "";
+//        winner = true;
+//        winnerName = "";
+//        currentCard = new Card();
+//        String currentSuit;
+//
+//        boolean playersError = false;
+//        initialize();
 
-        Image img = new Image(inputStream);
-        imageView.setImage(img);
+
     }
 
     @FXML

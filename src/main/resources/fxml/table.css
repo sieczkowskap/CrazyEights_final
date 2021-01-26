@@ -1,0 +1,14 @@
+.chart-plot-background{
+    -fx-background-color: #aed2bc;
+    -fx-foreground-color: #656766;
+    -fx-stroke: #e5fcf3;
+}
+
+.button-style-unclicked {
+    -fx-background-color: #69ab91;
+}
+
+.chart-symbol {
+    -fx-background-radius: 2.5px ;
+    -fx-padding: 2.5px ;
+}

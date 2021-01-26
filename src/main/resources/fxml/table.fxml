@@ -25,9 +25,9 @@
       <Pane prefHeight="122.0" prefWidth="81.0" />
       <Pane prefHeight="141.0" prefWidth="266.0" GridPane.columnIndex="1">
          <children>
-            <Text fx:id="TVOponentAction" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oponent's last action" textAlignment="CENTER" wrappingWidth="328.79999999999995">
+            <Text fx:id="TVOponentAction" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="328.79999999999995">
                <font>
-                  <Font size="17.0" />
+                  <Font size="36.0" />
                </font></Text>
             <Text fx:id="TVOponentCards" layoutX="-2.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oponent's cards" textAlignment="CENTER" wrappingWidth="328.79999999999995">
                <font>
@@ -73,7 +73,7 @@
       </Pane>
       <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="btnNewGame" layoutX="31.0" layoutY="45.0" mnemonicParsing="false" onAction="#onBtnNewGameClick" text="New Game" />
+            <Button fx:id="btnNewGame" layoutX="29.0" layoutY="18.0" mnemonicParsing="false" onAction="#onBtnNewGameClick" prefHeight="78.0" prefWidth="79.0" text="New Game" />
          </children></Pane>
       <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>

@@ -1,6 +1,5 @@
 package edu.ib;
 
-import javafx.scene.text.Text;
 
 public class RealPlayer extends Player {
     boolean real = true;

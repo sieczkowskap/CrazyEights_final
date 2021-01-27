@@ -15,7 +15,10 @@ import javafx.scene.text.Text;
 import javafx.collections.*;
 import javafx.stage.Stage;
 
-
+/**
+ * Implements all game functions to javaFX.
+ * Possible actions for human player: draw card, play card, choose new suit after playing 8, start new game
+ */
 public class TableFXController {
 
     @FXML
@@ -77,6 +80,14 @@ public class TableFXController {
     ObservableList<String> suits = FXCollections.observableArrayList(" \u2663",
             " \u2660", " \u2666", " \u2665");
 
+    /**
+     * Method to draw card on pressing BtnDraw button.
+     * Top card is moved from deck to player's hand.
+     * Refreshes counters for cards in deck and player's card.
+     * Shuffles cards from table to deck when if deck is empty.
+     * @exception IndexOutOfBoundsException when deck is empty and cant shuffle cards from table pile.
+     * @see IndexOutOfBoundsException
+     */
     // metoda dobierania kart
     @FXML
     void onBtnDrawClick(ActionEvent event) {
@@ -98,6 +109,17 @@ public class TableFXController {
     }
 
 
+    /**
+     * Allows human player to play selected card and start computer players's turn.
+     * Human player play card first.
+     * Player can play only card that match current suit or rank.
+     * Player can not play card with rank 8 as last card.
+     * Player can not play 8 without choosing new suit.
+     * When human player plays card computer player makes turn.
+     * Computer prioritizes cards with rank other than 8 while choosing card to play except situation when only 1 card with rank other than 8 remains on computer's hand.
+     * After playing card by any player program check if there is a winner.
+     * Game can not be continued if one of the players wins the game.
+     */
     @FXML
     void onBtnPlayClick(ActionEvent event) throws FileNotFoundException {
 
@@ -267,6 +289,9 @@ public class TableFXController {
         CBSuitSelect.setItems(suits);
     }
 
+    /**
+     * Shuffle deck if needed during human player turn.
+     */
     void shuffleDeckIfEmptyPlayer() {
         if (deck.getCards().size() == 0) {  // sprawdzenie czy deck jest pusty, jeśli tak, tasowanie kart
             Boolean continueplay = false;
@@ -290,6 +315,10 @@ public class TableFXController {
         }
     }
 
+
+    /**
+     * Shuffle deck if needed during computer player turn.
+     */
     void shuffleDeckIfEmptyComputer() {
         if (deck.getCards().size() == 0) {  // sprawdzenie czy deck jest pusty
             Boolean continueplay = false;
@@ -318,6 +347,12 @@ public class TableFXController {
     // Diamond - \u2666
     // Heart - \u2665
 
+
+    /**
+     * Converts suit unicode to String.
+     * @param unicode value to be converted
+     * @return  suit in String value
+     */
     // comboBox Suits
     String unicodeToStringsSuits(String unicode) {
 
@@ -333,6 +368,13 @@ public class TableFXController {
         return unicode;
     }
 
+
+
+    /**
+     * Converts suit from String to unicode.
+     * @param unicode value to be converted
+     * @return  unicode value for suit
+     */
     // konwertowanie do wyświetlenia aktualnego koloru
     String stringToUnicode(String unicode) {
 
@@ -348,6 +390,13 @@ public class TableFXController {
         return unicode;
     }
 
+
+    /**
+     * Split card rank and suit.
+     * Converts suit from unicode to String.
+     * @param uni card rank and suit
+     * @return  card suit in String value
+     */
     // comboBox Cards
     String[] unicodeToStringsCards(String uni) {
         String inter = uni.substring(1);
@@ -367,6 +416,11 @@ public class TableFXController {
         return split;
     }
 
+    /**
+     * Converts suit for all player's cards from String to unicode.
+     * @param cards list of player's cards
+     * @return  suits for cards in unicode
+     */
     // przygotowywanie do wyświetlenia kart u gracza
     ObservableList stringsToUnicode(ArrayList<Card> cards) {
         String[] unis = new String[cards.size()];
@@ -387,13 +441,22 @@ public class TableFXController {
 
         return FXCollections.observableArrayList(unis);
     }
-
+    /**
+     * Show image of current top card on the table.
+     * @param rank card rank
+     * @param suit card suit
+     * @exception FileNotFoundException when file is missing
+     * @see FileNotFoundException
+     */
     void showCard(String rank, String suit) throws FileNotFoundException {
 
         Image cardImage = new Image(getClass().getResourceAsStream("/images/" + rank + suit.charAt(0) + ".png"));
         imageView.setImage(cardImage);
     }
 
+    /**
+     * Starts new game in new window on pressing BtnNewGameClick button.
+     */
     @FXML
     void onBtnNewGameClick(ActionEvent event) throws Exception {
 
@@ -405,6 +468,13 @@ public class TableFXController {
 
     }
 
+
+    /**
+     * Initialize game.
+     * Sets starting parameters.
+     * @exception FileNotFoundException when file is missing
+     * @see FileNotFoundException
+     */
     @FXML
     void initialize() throws FileNotFoundException {
         assert TVOponentAction != null : "fx:id=\"TVOponentAction\" was not injected: check your FXML file 'table.fxml'.";

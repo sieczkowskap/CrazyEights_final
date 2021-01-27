@@ -3,15 +3,30 @@ package edu.ib;
 
 import java.util.ArrayList;
 
+/**
+ * Simulates computer player.
+ * Extends abstract class Player
+ */
 public class ComputerPlayer extends Player {
     boolean real = false;
 
-
+    /**
+     * @return information whether player is human or computer
+     */
     @Override
     public boolean isReal() {
         return super.isReal(real);
     }
 
+
+    /**
+     * Computer player turn.
+     * @param rank rank of the card which computer player tries to play
+     * @param suit suit of the card which computer player tries to play
+     * @param table top card on table pile
+     * @param currentSuit current suit set in the game
+     * @return played card
+     */
     @Override
     public Card turn(String rank, String suit, Table table, String currentSuit) {
         Card card = new Card();
@@ -37,6 +52,11 @@ public class ComputerPlayer extends Player {
         return super.turn(card);
     }
 
+    /**
+     * Implements strategy for choosing color after playing card with rank 8 to computer player.
+     * Computer player chooses the most common color from hand.
+     * @return the most common color in computer player cards
+     */
     // metoda sprawdzająca, jakich kolorów kart komputer ma najwięcej, żeby wybrać kolor
     public String theMost() {
         String r = "";
@@ -74,6 +94,11 @@ public class ComputerPlayer extends Player {
         return r;
     }
 
+    /**
+     * Implements better strategy for computer player.
+     * Computer player plays card with rank 8 when only 1 card with rank other than 8 remains in hand.
+     * @return information if computer player should start to play cards with rank 8
+     */
     public boolean throwEights() {
         int count = 0;
         ArrayList<Card> cards = getCards();

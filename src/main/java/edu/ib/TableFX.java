@@ -8,12 +8,25 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Application Crazy Eights.
+ * User can play game "Crazy Eights" versus computer opponent.
+ */
 public class TableFX extends Application {
 
+    /**
+     * Launch program
+     * @param args unused.
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Creates stage in javaFX where user can play the game.
+     * @exception IOException on input error
+     * @see IOException
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
 

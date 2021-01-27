@@ -144,7 +144,7 @@ public class TableFXController {
 
 
                                         if (CBSuitSelect.getValue() == null) { // gracz nie dokonał wyboru koloru
-                                            TVPrompts.setText("You haven't chosen new suit.");
+                                            TVPrompts.setText("You didn't choose new suit.");
                                             playersError = true;
                                             break;
                                         } else { // gracz dokonał wyboru

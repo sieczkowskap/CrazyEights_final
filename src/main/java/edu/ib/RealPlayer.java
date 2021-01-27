@@ -34,19 +34,19 @@ public class RealPlayer extends Player {
                     prompt = ("You made your move successfully.");
                     // JavaFX - komunikat
                 } else if (getCards().get(j).getRank().equals("8") && getN() == 1) {
-                    prompt = ("You cannot end game with am eight.");
+                    prompt = ("You can't end game with an eight.");
                 }
             }
         }
 
         // JavaFX - komunikat - tego nie będzie, bo gracz wybiera karty spośród widocznych na ekranie
         if (!hasCard) { // gracz nie ma karty, którą zadeklarował
-            prompt = ("You do not have this card.");
+            prompt = ("You don't have this card.");
         }
 
         // JavaFX - komunikat
         if (!match) { // karta, którą zadeklarował gracz, nie pasuje
-            prompt = ("This card does not match card on the table.");
+            prompt = ("This card doesn't match card on the table.");
         }
 
         return super.turn(card);
